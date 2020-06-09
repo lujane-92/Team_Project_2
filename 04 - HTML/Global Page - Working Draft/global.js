@@ -1,34 +1,34 @@
 // map1 - Share of Internet Users per Country - leaflet
-// var myMap1 = L.map("map1", {
-//     center: [56.1304, 106.3468],
-//     zoom: 13
-//   });
+ var myMap1 = L.map("map1", {
+     center: [56.1304, 106.3468],
+     zoom: 13
+   });
   
 
-// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-//     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-//     maxZoom: 18,
-//     id: 'mapbox/streets-v11',
-//     tileSize: 512,
-//     zoomOffset: -1,
-//     accessToken: API_KEY
-// }).addTo(myMap1);
+ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+     maxZoom: 18,
+     id: 'mapbox/streets-v11',
+     tileSize: 512,
+     zoomOffset: -1,
+     accessToken: API_KEY
+ }).addTo(myMap1);
 
 
 
 // map2 - Number of Internet Users per Country - leaflet
-// var myMap2 = L.map("map1", {
-//     center: [56.1304, 106.3468],
-//     zoom: 13
-//   });
-// L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-//     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-//     maxZoom: 18,
-//     id: 'mapbox/streets-v11',
-//     tileSize: 512,
-//     zoomOffset: -1,
-//     accessToken: API_KEY
-// }).addTo(myMap2);
+ var myMap2 = L.map("map1", {
+     center: [56.1304, 106.3468],
+     zoom: 13
+   });
+ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+     maxZoom: 18,
+     id: 'mapbox/streets-v11',
+     tileSize: 512,
+     zoomOffset: -1,
+     accessToken: API_KEY
+ }).addTo(myMap2);
 
 
 // internet cost v. speed - scatterplot(bubbles) D3
