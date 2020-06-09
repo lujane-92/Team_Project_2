@@ -17,7 +17,7 @@
 
 
 // map2 - Number of Internet Users per Country - leaflet
- var myMap2 = L.map("map1", {
+ var myMap2 = L.map("map2", {
      center: [56.1304, 106.3468],
      zoom: 13
    });
