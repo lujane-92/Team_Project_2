@@ -48,6 +48,7 @@ Plotly.newPlot("plot", data, layout);
      color: 'white'},
    type: 'pie'
  };
+ 
 
  var data1 = [trace1];
 
@@ -64,6 +65,12 @@ Plotly.newPlot("plot", data, layout);
       font: {
          color: 'white'
        }},
+       margin: {
+        l: 10,
+        r: 10,
+        t: 100,
+        b: 10
+    },
 
 };
 
