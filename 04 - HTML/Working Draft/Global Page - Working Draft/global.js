@@ -70,7 +70,7 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
     });
     //  Create scale functions
     var xLinearScale = d3.scaleLinear()
-      .domain([20, d3.max(costSpeedData, d => d.cost)])
+      .domain([0, d3.max(costSpeedData, d => d.cost)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
@@ -97,7 +97,7 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
     .attr("cx", d => xLinearScale(d.cost))
     .attr("cy", d => yLinearScale(d.speed))
     .attr("r", "15")
-    .attr("fill", "yellow")
+    .attr("fill", "orange")
     .attr("opacity", ".8");
 
     // Initialize tool tip
