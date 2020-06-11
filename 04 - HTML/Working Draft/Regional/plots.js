@@ -2,11 +2,13 @@
 var trace = {
   x: ["Africa","Asia","Europe", "Latin America / Caribbean", "Middle East","North America", "Australia"],
   y: [1340598447, 4294516659, 834995197, 658345826, 260991690, 368869647, 42690838],
+  name: 'Population',
   type: "bar"
 };
 var trace1 = {
   x: ["Africa","Asia","Europe", "Latin America / Caribbean", "Middle East","North America", "Australia"],
   y: [526710313, 2366213308, 727848547, 453702292, 183212099, 348908868, 28917600],
+  name: 'Internet Users',
   type: "bar"
 };
 
@@ -28,7 +30,7 @@ var layout = {
       color:'rgb(255,255,255)'},
   
   legend: {
-    font: {
+        font: {
        color: 'white'
      }},
 
