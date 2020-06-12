@@ -1,7 +1,7 @@
-// map1 - Share of Internet Users per Country - leaflet
+// MAP - Share of Internet Users per Country & Number of users per country
  var map1 = L.map("map1", {
-     center: [43.6532, 79.3832],
-     zoom: 5
+     center: [36.7397,3.05097],
+     zoom: 2
    });
  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -13,72 +13,48 @@
  }).addTo(map1);
 
 
+ var regions = [
+  {
+    countries: "Algeria",
+    internetUsers: 25428159,
+    percentPopulation: 0.58,
+    population: 43851044,
+    region: "Africa",
+    location: [36.7397,3.05097]
+  },
+  {
+    countries: "Angola",
+    internetUsers: 7078067,
+    percentPopulation: 0.22,
+    population: 32866272,
+    region: "Africa",
+    location: [-8.81155, 13.242]
+  }];
 
-//  for (var i = 0; i < regions.length; i++) {
-
-//   var color = "";
-//   if (regions[i].Percent_Population > 0.80) {
-//     color = "yellow";
-//   }
-//   else if (regions[i].Percent_Population > 0.50) {
-//     color = "blue";
-//   }
-//   else if (regions[i].Percent_Population > 0.25) {
-//     color = "green";
-//   }
-//   else {
-//     color = "red";
-//   }
-//   // Add circles to map
-//   L.circle([regions[i].Latitude,regions[i].Longitude] {
-//     fillOpacity: 0.75,
-//     color: "white",
-//     fillColor: color,
-//     // Adjust radius
-//     radius: regions[i].Percent_Population * 5000
-//   }).bindPopup("<h3>" + regions[i].Countries + "</h3> <hr> <h3>Percentage of population using the internet: " + regions[i].Percent_Population + "</h3>").addTo(map1);
-// };
-
-// for (var i = 0; i < regions.length; i++) {
-//   var country = regions[i];
-//   L.marker([country.Latitude,country.Longitude])
-//     .bindPopup("<h3>" + country.Countries + "</h3> <hr> <h3>Population " + country.Percent_Population + "</h3>")
-//     .addTo(map1);
+  for (var i = 0; i < regions.length; i++) {
+    var color = "";
+    console.log(regions[i].location);
+    if (regions[i].percentPopulation > 0.75) {
+      color = "green";
+    }
+    else if (regions[i].percentPopulation > 0.50) {
+      color = "blue";
+    }
+    else {
+      color = "red";
+    }
+  
+    L.circle(regions[i].location, {
+      fillOpacity: 0.75,
+      color: "white",
+      fillColor: color,
+      radius: regions[i].percentPopulation * 500000
+    }).bindPopup("<h2>" + regions[i].countries + "</h2> <hr> <h2>Percentage of population using the internet: " + regions[i].percentPopulation +  "</h2> <hr> <h2>Number of people using the internet: " + regions[i].internetUsers +  "</h2>" ).addTo(map1);
+  };
+  
 
 
-
-
-// map2 - Number of Internet Users per Country - leaflet
- var map2 = L.map("map2", {
-     center: [43.6532, 79.3832],
-     zoom: 5
-   });
- L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-     maxZoom: 18,
-     id: 'mapbox/streets-v11',
-     tileSize: 512,
-     zoomOffset: -1,
-     accessToken: API_KEY
- }).addTo(map2);
-
-//  var link = "Country_details.json"
-//  function createMarkers(response) {
-//    var regions = response.???;
-//    var regionMarkers = [];
- 
-//    for (var index = 0; index < regions.length; index++) {
-//      var region = regions[index];
-//      var regionMarker = L.marker([region.Latitude, region.Longitude)
-//        .bindPopup("<h3>" + region.Region + "<h3><h3>Number of people using the internet: " + region['Internet Users'] + "</h3>");
- 
-//      regionMarkers.push(regionMarker);
-//    }
-//    createMap(L.layerGroup(regionMarkers));
-//  }
-//  d3.json(link, createMarkers);
-
-// internet cost v. speed - scatterplot(bubbles) D3
+// internet cost v. speed - bubbles - D3
 var svgWidth = 1100;
 var svgHeight = 600;
 
@@ -86,7 +62,7 @@ var margin = {
   top: 20,
   right: 40,
   bottom: 60,
-  left: 110
+  left: 100
 };
 
 var width = svgWidth - margin.left - margin.right;
@@ -182,3 +158,7 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
   }).catch(function(error) {
     console.log(error);
   });
+
+
+
+ 

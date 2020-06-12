@@ -6,10 +6,9 @@
   color: white;
 }
 
-html, body {
-  height: 100px;
+h2 {
+  color: black;
 }
-#map1 { height: 100px; }
 
 
 * {
