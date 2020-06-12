@@ -1,86 +1,130 @@
-// Part 1
-var trace = {
-  x: ["Africa","Asia","Europe", "Latin America / Caribbean", "Middle East","North America", "Australia"],
-  y: [1340598447, 4294516659, 834995197, 658345826, 260991690, 368869647, 42690838],
+var trace1 = {
+  x: data.map(row => row.World_Regions),
+  y: data.map(row => row.Population),
+  text: data.map(row => row.World_Regions),
+  name: "Population",
   type: "bar"
 };
 
-var data = [trace];
-
-var layout = {
-  title: "Population by region",
-  xaxis: { title: "Region"},
-  yaxis: { title: "Popuation"}
+var trace2 = {
+  x: data.map(row => row.World_Regions),
+  y: data.map(row => row.Internet_users),
+  text: data.map(row => row.World_Regions),
+  name: "Internet Users",
+  type: "bar"
 };
 
+
+
+// Combining both traces
+var data = [trace1, trace2];
+
+// Apply the group barmode to the layout
+// var layout = {
+//   title: "Greek vs Roman gods search results",
+//   barmode: "group"
+// };
+var layout = {
+  paper_bgcolor : 'rgb(78,93,108)',
+  plot_bgcolor: 'rgb(78,93,108)',
+  title: {
+      text: "Population by region",
+      font: {color: 'rgb(255,255,255)'}
+  },
+  yaxis:{
+      title: 'Population',
+      color:'rgb(255,255,255)'
+  },
+  xaxis:{
+      title: 'Regions',
+      color:'rgb(255,255,255)'},
+  
+  legend: {
+        font: {
+       color: 'white'
+     }},
+
+};
+
+// Render the plot to the div tag with id "plot"
 Plotly.newPlot("plot", data, layout);
 
-
-// // Part 2 - Adding attributes
-// var trace1 = {
-//   x: ["beer", "wine", "martini", "margarita",
-//       "ice tea", "rum & coke", "mai tai", "gin & tonic"],
-//   y: [22.7, 17.1, 9.9, 8.7, 7.2, 6.1, 6.0, 4.6],
-//   type: "bar"
+// var trace3 = {
+//   x: data.map(row => row.World_Regions),
+//   y: data.map(row => row.Penetration_Rate),
+//   name: "Population",
+//   type: "scatter"
 // };
 
-// var data = [trace1];
-
-// var layout = {
-//   title: "'Bar' Chart",
-//   xaxis: { title: "Drinks"},
-//   yaxis: { title: "% of Drinks Ordered"}
+// var trace4 = {
+//   x: data.map(row => row.World_Regions),
+//   y: data.map(row => row.Population_Perc_of_World),
+//   name: "Internet Users",
+//   type: "scatter"
 // };
 
-// Plotly.newPlot("plot", data, layout);
 
 
-// // Part 3 - Line Chart
-// var trace1 = {
-//   x: ["beer", "wine", "martini", "margarita",
-//       "ice tea", "rum & coke", "mai tai", "gin & tonic"],
-//   y: [22.7, 17.1, 9.9, 8.7, 7.2, 6.1, 6.0, 4.6],
-//   type: "line"
+// // Combining both traces
+// var data2 = [trace3, trace4];
+
+
+// var layout2 = {
+//   paper_bgcolor : 'rgb(78,93,108)',
+//   plot_bgcolor: 'rgb(78,93,108)',
+//   title: {
+//       text: "Population by region",
+//       font: {color: 'rgb(255,255,255)'}
+//   },
+//   yaxis:{
+//       title: 'Population',
+//       color:'rgb(255,255,255)'
+//   },
+//   xaxis:{
+//       title: 'Regions',
+//       color:'rgb(255,255,255)'},
+  
+//   legend: {
+//         font: {
+//        color: 'white'
+//      }},
+
 // };
 
-// var data = [trace1];
+// // Render the plot to the div tag with id "plot"
+// Plotly.newPlot("plot3", data2, layout2);
 
-// var layout = {
-//   title: "'Bar' Chart",
-// };
-
-// Plotly.newPlot("plot", data, layout);
-
-// // Part 4 - Broken Pie Chart
-// var trace1 = {
-//   x: ["beer", "wine", "martini", "margarita",
-//       "ice tea", "rum & coke", "mai tai", "gin & tonic"],
-//   y: [22.7, 17.1, 9.9, 8.7, 7.2, 6.1, 6.0, 4.6],
+// // Pie chart
+// var trace3 = {
+//   values: data.map(row => row.Population_Perc_of_World),
+//   labels: data.map(row => row.World_Regions),
+//   textfont: {
+//     color: 'white'},
 //   type: "pie"
 // };
+// var layout1 = {
+//   paper_bgcolor : 'rgb(78,93,108)',
+//   plot_bgcolor: 'rgb(78,93,108)',
+//   title: {
+//       text: "% of Population by Region",
+//       font: {color: 'rgb(255,255,255)'}
+//   },
+  
+//   legend: {
+//     x: 0, y: -2,
+//     font: {
+//        color: 'white'
+//      }},
+//      margin: {
+//       l: 10,
+//       r: 10,
+//       t: 100,
+//       b: 10
+//   },
 
-// var data = [trace1];
-
-// var layout = {
-//   title: "'Bar' Chart",
 // };
 
-// Plotly.newPlot("plot", data, layout);
+// var data1 = [trace3];
 
 
-// // Part 5 - Working Pie Chart
- var trace1 = {
-   labels: ["Africa","Asia","Europe", "Latin America / Caribbean", "Middle East", "North America", "Australia"],
-   values: [17.20, 55.10, 10.70, 8.50, 3.90, 4.70, 0.50],
-   type: 'pie'
- };
-
- var data1 = [trace1];
-
- var layout = {
-   title: "% of Population by Region",
-   legend: {x: 0, y: -2}
- };
-
- Plotly.newPlot("plot2", data1, layout);
-
+// Plotly.newPlot("plot2", data1, layout1);

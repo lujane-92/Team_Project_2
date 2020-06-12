@@ -20,9 +20,8 @@ function getPlot(id) {
         var trace = {
             x: samplevalues,
             y: COUNTRY_id,
-            text: labels,
             marker: {
-              color: 'rgb(25,120,181)'},
+              color: 'rgb(255,140,26)'},
             type:"bar",
             orientation: "h",
         };
@@ -32,10 +31,20 @@ function getPlot(id) {
   
         // create layout variable to set plots layout
         var layout = {
-            title: "Top 10 Countries",
-            yaxis:{
-                tickmode:"linear",
+            paper_bgcolor : 'rgb(78,93,108)',
+            plot_bgcolor: 'rgb(78,93,108)',
+            title: {
+                text: "Top 10 Countries",
+                font: {color: 'rgb(255,255,255)'}
             },
+            yaxis:{
+                title: 'Score',
+                color:'rgb(255,255,255)',
+                tickmode:"linear"
+            },
+            xaxis:{
+                title: 'Country',
+                color:'rgb(255,255,255)'},
             margin: {
                 l: 180,
                 r: 100,
@@ -54,7 +63,7 @@ function getPlot(id) {
             y: samples.score,
             mode: "markers",
             marker: {
-                color: samples.country
+                color: 'rgb(255,140,26)'
             },
             text: samples.rank,
             type:"scatter"
@@ -62,9 +71,27 @@ function getPlot(id) {
         };
   
         // set the layout for the bubble plot
+        
         var layout_b = {
-            title: "All Countries Ranking"
-        };
+            paper_bgcolor : 'rgb(78,93,108)',
+            plot_bgcolor: 'rgb(78,93,108)',
+            title: {
+                text: "All Countries Ranking",
+                font: {color: 'rgb(255,255,255)'}
+            },
+            yaxis:{
+                title: 'Score',
+                color:'rgb(255,255,255)'
+            },
+            xaxis:{
+                title: 'Country',
+                color:'rgb(255,255,255)'},
+            margin: {
+                l: 180,
+                r: 100,
+                t: 100,
+                b: 100
+            }};
   
         // creating data variable 
         var data1 = [trace1];
@@ -93,7 +120,7 @@ function getInfo(id) {
 
         // grab the necessary demographic data data for the id and append the info to the panel
         Object.entries(result).forEach((key) => {   
-                demographicInfo.append("h5").text(key[0].toUpperCase() + ": " + key[1] + "\n");    
+                demographicInfo.append("h5").text( key[1] + "\n");    
         });
     });
 }

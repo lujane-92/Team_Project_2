@@ -38,16 +38,33 @@ var trace2 = {
 var data = [trace1,trace2];
 
 // Apply the group bar mode to the layout
-var layout = {
-  title: "Top 10 Countries in the Region by population",
-  xaxis: { title: "Population/Internet Users" },
-  yaxis: { title: "Country"},
-  margin: {
-    l: 100,
-    r: 100,
-    t: 100,
-    b: 100
-  }
+var layout =
+  {
+    paper_bgcolor : 'rgb(78,93,108)',
+    plot_bgcolor: 'rgb(78,93,108)',
+    title: {
+        text: "Top 10 Countries in the Region by population",
+        font: {color: 'rgb(255,255,255)'}
+    },
+    yaxis:{
+        title: 'Country',
+        color:'rgb(255,255,255)',
+        tickmode:"linear"
+    },
+    xaxis:{
+        title: 'Population/Internet Users',
+        color:'rgb(255,255,255)'},
+    margin: {
+        l: 180,
+        r: 100,
+        t: 100,
+        b: 100
+    },
+    legend: {
+      font: {
+         color: 'white'
+       }},
+
 };
 
 // Render the plot to the div tag with id "plot"
