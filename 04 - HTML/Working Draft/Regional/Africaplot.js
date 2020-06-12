@@ -1,3 +1,7 @@
+d3.json("Country_details.json").then((importedData) => {
+  console.log(importedData);
+  var data = importedData;
+
 function filtercountries(country) {
   return country.Region === "Africa";
 }
@@ -70,3 +74,5 @@ var layout =
 
 // Render the plot to the div tag with id "plot"
 Plotly.newPlot("bar-plot", data, layout);
+});
+
