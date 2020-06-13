@@ -181,3 +181,9 @@ select country.countries, country.population, wi.overall_score, wi.universal_acc
 	from wi 
 	inner join country on wi.countries = country.countries
 	order by population DESC, overall_score DESC;
+
+-- Internet User count by region
+SELECT COUNT(internet_users),country.region
+FROM country
+GROUP BY region
+ORDER BY COUNT(internet_users) DESC;
