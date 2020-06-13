@@ -1,37 +1,60 @@
-// map1 - Share of Internet Users per Country - leaflet
- var myMap1 = L.map("map1", {
-     center: [56.1304, 106.3468],
-     zoom: 13
+// MAP - Share of Internet Users per Country & Number of users per country
+ var map1 = L.map("map1", {
+     center: [36.7397,3.05097],
+     zoom: 2
    });
+ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+     maxZoom: 18,
+     id: 'mapbox/streets-v11',
+     tileSize: 512,
+     zoomOffset: -1,
+     accessToken: "pk.eyJ1IjoibHVqYW5lOTIiLCJhIjoiY2thb2llZTFvMDJzMjJ3cWlvNHgwYmo1cSJ9.ASSry7Qp6PrHNQifvyRj2w"
+ }).addTo(map1);
+
+
+ var regions = [
+  {
+    countries: "Algeria",
+    internetUsers: 25428159,
+    percentPopulation: 0.58,
+    population: 43851044,
+    region: "Africa",
+    location: [36.7397,3.05097]
+  },
+  {
+    countries: "Angola",
+    internetUsers: 7078067,
+    percentPopulation: 0.22,
+    population: 32866272,
+    region: "Africa",
+    location: [-8.81155, 13.242]
+  }];
+
+  for (var i = 0; i < regions.length; i++) {
+    var color = "";
+    console.log(regions[i].location);
+    if (regions[i].percentPopulation > 0.75) {
+      color = "green";
+    }
+    else if (regions[i].percentPopulation > 0.50) {
+      color = "blue";
+    }
+    else {
+      color = "red";
+    }
+  
+    L.circle(regions[i].location, {
+      fillOpacity: 0.75,
+      color: "white",
+      fillColor: color,
+      radius: regions[i].percentPopulation * 500000
+    }).bindPopup("<h2>" + regions[i].countries + "</h2> <hr> <h2>Percentage of population using the internet: " + regions[i].percentPopulation +  "</h2> <hr> <h2>Number of people using the internet: " + regions[i].internetUsers +  "</h2>" ).addTo(map1);
+  };
   
 
- L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-     maxZoom: 18,
-     id: 'mapbox/streets-v11',
-     tileSize: 512,
-     zoomOffset: -1,
-     accessToken: API_KEY
- }).addTo(myMap1);
 
-
-
-// map2 - Number of Internet Users per Country - leaflet
- var myMap2 = L.map("map2", {
-     center: [56.1304, 106.3468],
-     zoom: 13
-   });
- L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-     maxZoom: 18,
-     id: 'mapbox/streets-v11',
-     tileSize: 512,
-     zoomOffset: -1,
-     accessToken: API_KEY
- }).addTo(myMap2);
-
-
-// internet cost v. speed - scatterplot(bubbles) D3
+// internet cost v. speed - bubbles - D3
 var svgWidth = 1100;
 var svgHeight = 600;
 
@@ -39,7 +62,7 @@ var margin = {
   top: 20,
   right: 40,
   bottom: 60,
-  left: 110
+  left: 100
 };
 
 var width = svgWidth - margin.left - margin.right;
@@ -70,7 +93,7 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
     });
     //  Create scale functions
     var xLinearScale = d3.scaleLinear()
-      .domain([20, d3.max(costSpeedData, d => d.cost)])
+      .domain([0, d3.max(costSpeedData, d => d.cost)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
@@ -138,6 +161,4 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
 
 
 
-
-// Top 10 countries by number, share, cost, speed - bar
-
+ 

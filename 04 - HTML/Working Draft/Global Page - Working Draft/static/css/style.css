@@ -1,8 +1,14 @@
-
-html, body {
-  height: 100px;
+.axisText {
+  color: white;
 }
-#map1 { height: 100px; }
+
+.scatter {
+  color: white;
+}
+
+h2 {
+  color: black;
+}
 
 
 * {
