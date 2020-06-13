@@ -9,35 +9,43 @@
      id: 'mapbox/streets-v11',
      tileSize: 512,
      zoomOffset: -1,
-     accessToken: "pk.eyJ1IjoibHVqYW5lOTIiLCJhIjoiY2thb2llZTFvMDJzMjJ3cWlvNHgwYmo1cSJ9.ASSry7Qp6PrHNQifvyRj2w"
+     accessToken: "pk.eyJ1IjoiYW5uYS1qZXNzaWNhIiwiYSI6ImNrYmQ2MW1yNjA4cmkycm80Ymh0a2s5aXAifQ.ZOUOyvEapguQx8cwAfSLaQ"
  }).addTo(map1);
 
+//  var regions =[
+//   {
+//   Countries: "Algeria",
+//   InternetUsers: 25428159,
+//   Percent_Population: 58,
+//   Population: 43851044,
+//   Region: "Africa",
+//   location: [36.7397,3.05097]
+// },
+// {
+//   Countries: "Angola",
+//   InternetUsers: 7078067,
+//   Percent_Population: 22,
+//   Population: 32866272,
+//   Region: "Africa",
+//   location: [-8.81155, 13.242]
+// },
+// {
+//   Countries: "Benin",
+//   InternetUsers: 3801758,
+//   Percent_Population: 31,
+//   Population: 12123200,
+//   Region: "Africa",
+//   location: [6.4779, 2.6323]
 
- var regions = [
-  {
-    countries: "Algeria",
-    internetUsers: 25428159,
-    percentPopulation: 0.58,
-    population: 43851044,
-    region: "Africa",
-    location: [36.7397,3.05097]
-  },
-  {
-    countries: "Angola",
-    internetUsers: 7078067,
-    percentPopulation: 0.22,
-    population: 32866272,
-    region: "Africa",
-    location: [-8.81155, 13.242]
-  }];
+// }];
 
   for (var i = 0; i < regions.length; i++) {
     var color = "";
     console.log(regions[i].location);
-    if (regions[i].percentPopulation > 0.75) {
+    if (regions[i].Percent_Population > 75) {
       color = "green";
     }
-    else if (regions[i].percentPopulation > 0.50) {
+    else if (regions[i].Percent_Population > 50) {
       color = "blue";
     }
     else {
@@ -48,12 +56,13 @@
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
-      radius: regions[i].percentPopulation * 500000
-    }).bindPopup("<h2>" + regions[i].countries + "</h2> <hr> <h2>Percentage of population using the internet: " + regions[i].percentPopulation +  "</h2> <hr> <h2>Number of people using the internet: " + regions[i].internetUsers +  "</h2>" ).addTo(map1);
+      radius: regions[i].Percent_Population * 5000
+    }).bindPopup("<h2>" + regions[i].Countries + "</h2> <hr> <h2>Percentage of population using the internet: " + regions[i].Percent_Population+  "</h2> <hr> <h2>Number of people using the internet: " + regions[i].InternetUsers +  "</h2>" ).addTo(map1);
   };
+
   
 
-
+// internet cost v. speed - bubbles - D3
 // internet cost v. speed - bubbles - D3
 var svgWidth = 1100;
 var svgHeight = 600;
@@ -158,7 +167,3 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
   }).catch(function(error) {
     console.log(error);
   });
-
-
-
- 
