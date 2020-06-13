@@ -1,10 +1,16 @@
+import json
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy import Column, Integer, String, Float
 
+
+
 from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
+
+
+
 
 from flask import Flask, jsonify
 
@@ -12,19 +18,6 @@ url = 'postgresql://{user}:{pw}@{url}/{db}'.format(user="postgres",pw="postgres"
 
 
 
-#class Test(Base):
-#  __tablename__ = "test"
-#  index = Column(Integer, primary_key=True)
-#  id = Column(String)
-#  iso2Code = Column(String)
-#  name = Column(String)
-#  region = Column(String)
-#  adminregion = Column(String)
-#  incomeLevel = Column(String)
-#  lendingType = Column(String)
-#  capitalCity = Column(String)
-#  longitude = Column(String)
-#  latitude = Column(String)
 
 
 class Country_Data(Base):
@@ -35,17 +28,39 @@ class Country_Data(Base):
   Penetration_percentage = Column(String)
   Population = Column(String)
   Region = Column(String)
+  Longitude = Column(String)
+  Latitude = Column(String)
+
+
+class webindex(Base):
+  __tablename__ = "webindex"
+  index = Column(Integer, primary_key=True)
+  Countries = Column(String)
+  Overall_Score = Column(sqlalchemy.types.Float)
   Longitude = Column(sqlalchemy.types.Float)
   Latitude = Column(sqlalchemy.types.Float)
+  Universal_Access = Column(sqlalchemy.types.Float)
+  Freedom_and_Openness = Column(sqlalchemy.types.Float)
+  Relevant_content = Column(sqlalchemy.types.Float)
+  Empowerment = Column(sqlalchemy.types.Float)
+  
+class World_Internet(Base):
+  __tablename__ = "world_details"
+  index = Column(Integer, primary_key=True)
+  World_Regions = Column(String)
+  Population = Column(String)
+  World_Population_Share = Column(String)
+  Internet_Users = Column(String)
+  Penetration_percentage = Column(String)
+  Growth_between_2000_and_2020 = Column(String)
+  World_Internet_User_Share = Column(String)
+
  
 
 engine = create_engine(url)
 Base.metadata.create_all(engine)
 
-#session = Session(bind=engine)
-#Name_list=session.query(Test.name,Test.longitude).order_by(Test.longitude).all()
-#session.close()
-#print(Name_list)
+
 
 # Flask Setup
 #################################################
@@ -56,39 +71,114 @@ def welcome():
     """List all available api routes."""
     return (
         f"Available Routes:<br/>"
-        f"/api/v1.0/precipitation<br/>"
-        f"/api/v1.0/stations<br/>"
-        f"/api/v1.0/tobs<br/>"
+        f"/api/v1.0/InternetByCountry<br/>"
+        f"/api/v1.0/WebIndex<br/>"
+        f"/api/v1.0/WorldInternet<br/>"
         f"/api/v1.0/<start><br/>"
         f"/api/v1.0/<start>/<end>"
     )
 
 
-@app.route("/api/v1.0/precipitation")
+@app.route("/api/v1.0/InternetByCountry")
 #Convert the query results to a dictionary using `date` as the key and `prcp` as the value.
 def name():
-    #Start Session
-    session = Session(bind=engine)
-
     #Query result
-    #Data_Table = session.query(Test)
-    Country_list=session.query(Country_Data.Countries,Country_Data.Internet_Users,Country_Data.Penetration_percentage,Country_Data.Longitude,Country_Data.Latitude).all()
+    session = Session(bind=engine)
+    Country_list=session.query(Country_Data.Countries,Country_Data.Internet_Users,Country_Data.Penetration_percentage,Country_Data.Population,Country_Data.Region,Country_Data.Longitude,Country_Data.Latitude).all()
     session.close()
-    print( Country_list)
+    print(Country_Data)
+    print(Country_list)
     #Create list containing information
-    test_dict=[]
+    country_dict=[]
     for i in range(len( Country_list)):
-        test_dict.append({
+        country_dict.append({
             "Country": Country_list[i][0],
-            "Longitude":Country_list[i][3],
-            "Latitude":Country_list[i][4],
-            "Internet Users":Country_list[i][1],
-            "Penetration percentage among population":Country_list[i][2]
+            "Internet_Users":Country_list[i][1],
+            "Penetration_percentage_among_population":Country_list[i][2],
+            "Population":int(Country_list[i][3]),
+            "Region":Country_list[i][4],
+            "Longitude":Country_list[i][5],
+            "Latitude":Country_list[i][6],
         })
     #Return the JSON representation of your dictionary.
-    return jsonify(test_dict)
+    json_country_string = json.dumps(country_dict)
+    json_country_string = json_country_string.replace("\"Country\"", "Country")
+    json_country_string = json_country_string.replace("\"Internet_Users\"", "Internet_Users")
+    json_country_string = json_country_string.replace("\"Penetration_percentage_among_population\"", "Penetration_percentage_among_population")
+    json_country_string = json_country_string.replace("\"Population\"", "Population")
+    json_country_string = json_country_string.replace("\"Region\"", "Region")
+    json_country_string = json_country_string.replace("\"Longitude\"", "Longitude")
+    json_country_string = json_country_string.replace("\"Laitude\"", "Laitude")
+    #return json string
+    return "country_data="+json_country_string
+
+
+@app.route("/api/v1.0/WebIndex")
+def internet_index():
+    #Query result
+    session = Session(bind=engine)
+    web_index_list=session.query(webindex.Countries,webindex.Overall_Score,webindex.Longitude,webindex.Latitude,webindex.Universal_Access,webindex.Freedom_and_Openness,webindex.Relevant_content,webindex.Empowerment).all()
+    session.close()
+    print(webindex)
+    print(web_index_list)
+    #Create list containing information
+    web_index_dict=[]
+    for i in range(len(web_index_list)):
+        web_index_dict.append({
+            "countries": web_index_list[i][0],
+            "overalls":web_index_list[i][1],
+            "longitude":web_index_list[i][2],
+            "latitude":web_index_list[i][3],
+            "universals":web_index_list[i][4],
+            "freedoms":web_index_list[i][5],
+            "relevant_content":web_index_list[i][6],
+            "empowerment":web_index_list[i][7]
+        })
+    #Return the JSON representation of your dictionary.
+    web_index_string = json.dumps(web_index_dict)
+    web_index_string = web_index_string.replace("\"countries\"", "countries")
+    web_index_string = web_index_string.replace("\"overalls\"", "overalls")
+    web_index_string = web_index_string.replace("\"longitude\"", "longitude")
+    web_index_string = web_index_string.replace("\"latitude\"", "latitude")
+    web_index_string = web_index_string.replace("\"universals\"", "universals")
+    web_index_string = web_index_string.replace("\"freedoms\"", "freedoms")
+    web_index_string = web_index_string.replace("\"relevant_content\"", "relevant_content")
+    web_index_string = web_index_string.replace("\"empowerment\"", "empowerment")
+    #return json string
+    return "web_index="+ web_index_string
+
+@app.route("/api/v1.0/WorldInternet")
+def world_internet():
+    #Query result
+    session = Session(bind=engine)
+    wrold_internet_stats=session.query(World_Internet.World_Regions,World_Internet.Population,World_Internet.World_Population_Share,World_Internet.Internet_Users,World_Internet.Penetration_percentage,World_Internet.Growth_between_2000_and_2020,World_Internet.World_Internet_User_Share).all()
+    session.close()
+    print(World_Internet)
+    print(wrold_internet_stats)
+    #Create list containing information
+    world_web_dict=[]
+    for i in range(len(wrold_internet_stats)):
+        world_web_dict.append({
+            "World Regions": wrold_internet_stats[i][0],
+            "Population":str(wrold_internet_stats[i][1]),
+            "Population % of World":wrold_internet_stats[i][2],
+            "Internet Users":wrold_internet_stats[i][3],
+            "Penetration Rate (% Pop)":wrold_internet_stats[i][4],
+            "Growth 2000-2020":wrold_internet_stats[i][5],
+            "Internet World %":wrold_internet_stats[i][6],
+        })
+    #Return the JSON representation of your dictionary.
+    world_web_string = json.dumps(world_web_dict)
+    world_web_string = world_web_string.replace("\"World Regions\"", "World Regions")
+    world_web_string = world_web_string.replace("\"Population\"", "Population")
+    world_web_string = world_web_string.replace("\"Population % of World\"", "Population % of World")
+    world_web_string = world_web_string.replace("\"Internet Users\"", "Internet Users")
+    world_web_string = world_web_string.replace("\"Penetration Rate (% Pop)\"", "Penetration Rate (% Pop)")
+    world_web_string = world_web_string.replace("\"Growth 2000-2020\"", "Growth 2000-2020")
+    world_web_string = world_web_string.replace("\"Internet World %\"", "Internet World %")
+    #return json string
+    return "world_web_data="+ world_web_string
+
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
