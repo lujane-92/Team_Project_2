@@ -12,6 +12,8 @@
      accessToken: "pk.eyJ1IjoiYW5uYS1qZXNzaWNhIiwiYSI6ImNrYmQ2MW1yNjA4cmkycm80Ymh0a2s5aXAifQ.ZOUOyvEapguQx8cwAfSLaQ"
  }).addTo(map1);
 
+d3.json("data.json").then(function(regions) {
+  console.log(regions);
 
   for (var i = 0; i < regions.length; i++) {
     var color = "";
@@ -34,7 +36,7 @@
     }).bindPopup("<h2>" + regions[i].Countries + "</h2> <hr> <h2>Percentage of population using the internet: " + regions[i].Percent_Population+  "</h2> <hr> <h2>Number of people using the internet: " + regions[i].InternetUsers +  "</h2>" ).addTo(map1);
   };
 
-  
+});
 
 
 // // internet cost v. speed - bubbles - D3
@@ -61,7 +63,9 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Import Data
-d3.csv("internetData.csv").then(function(costSpeedData) {
+
+d3.json("csvjson (1).json").then(function(costSpeedData) {
+  console.log(costSpeedData);
 
     //  Parse Data/Cast as numbers
     costSpeedData.forEach(function(data) {
@@ -126,12 +130,14 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Internet Speed");
+      .text("Internet Speed")
+      .attr("fill", "white");
 
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Internet Monthly Cost");
+      .text("Internet Monthly Cost")
+      .attr("fill", "white");;
   }).catch(function(error) {
     console.log(error);
   });
