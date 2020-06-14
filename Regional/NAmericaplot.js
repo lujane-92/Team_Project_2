@@ -1,9 +1,9 @@
-d3.json("Country_details.json").then((importedData) => {
+d3.json("../Project Work/02 - Analysis/04_Flask_SQLAchemy/InternetByCountry_JavaScript_2.json").then((importedData) => {
   console.log(importedData);
   var data = importedData;
 
 function filtercountries(country) {
-  return country.Region === "North_America";
+  return country.Region === "America";
 }
 
 // 2. Use filter() to pass the function as its argument
@@ -24,7 +24,7 @@ reversedData = slicedData.reverse();
 // Trace1 for the Greek Data
 var trace1 = {
   x: reversedData.map(object => object.Population),
-  y: reversedData.map(object => object.Countries),
+  y: reversedData.map(object => object.Country),
   name: "Population",
   type: "bar",
   orientation: "h"
@@ -32,7 +32,7 @@ var trace1 = {
 
 var trace2 = {
   x: reversedData.map(object => object.Internet_Users),
-  y: reversedData.map(object => object.Countries),
+  y: reversedData.map(object => object.Country),
   name: "Internet_Users",
   type: "bar",
   orientation: "h"
