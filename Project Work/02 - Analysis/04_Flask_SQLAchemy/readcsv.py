@@ -14,7 +14,7 @@ Base = declarative_base()
 
 from flask import Flask, jsonify
 
-url = 'postgresql://{user}:{pw}@{url}/{db}'.format(user="postgres",pw="postgres",url="localhost",db="Internet_DB")
+url = 'postgresql://{user}:{pw}@{url}/{db}'.format(user="postgres",pw="lujane92",url="localhost",db="Internet_DB")
 
 
 
