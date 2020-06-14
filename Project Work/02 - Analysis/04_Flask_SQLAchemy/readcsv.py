@@ -101,16 +101,7 @@ def name():
             "Latitude":Country_list[i][6],
         })
     #Return the JSON representation of your dictionary.
-    json_country_string = json.dumps(country_dict)
-    json_country_string = json_country_string.replace("\"Country\"", "Country")
-    json_country_string = json_country_string.replace("\"Internet_Users\"", "Internet_Users")
-    json_country_string = json_country_string.replace("\"Penetration_percentage_among_population\"", "Penetration_percentage_among_population")
-    json_country_string = json_country_string.replace("\"Population\"", "Population")
-    json_country_string = json_country_string.replace("\"Region\"", "Region")
-    json_country_string = json_country_string.replace("\"Longitude\"", "Longitude")
-    json_country_string = json_country_string.replace("\"Laitude\"", "Laitude")
-    #return json string
-    return "country_data="+json_country_string
+    return jsonify(country_dict)
 
 
 @app.route("/api/v1.0/WebIndex")
@@ -135,17 +126,7 @@ def internet_index():
             "empowerment":web_index_list[i][7]
         })
     #Return the JSON representation of your dictionary.
-    web_index_string = json.dumps(web_index_dict)
-    web_index_string = web_index_string.replace("\"countries\"", "countries")
-    web_index_string = web_index_string.replace("\"overalls\"", "overalls")
-    web_index_string = web_index_string.replace("\"longitude\"", "longitude")
-    web_index_string = web_index_string.replace("\"latitude\"", "latitude")
-    web_index_string = web_index_string.replace("\"universals\"", "universals")
-    web_index_string = web_index_string.replace("\"freedoms\"", "freedoms")
-    web_index_string = web_index_string.replace("\"relevant_content\"", "relevant_content")
-    web_index_string = web_index_string.replace("\"empowerment\"", "empowerment")
-    #return json string
-    return "web_index="+ web_index_string
+    return jsonify(web_index_dict)
 
 @app.route("/api/v1.0/WorldInternet")
 def world_internet():
@@ -168,17 +149,9 @@ def world_internet():
             "Internet World %":wrold_internet_stats[i][6],
         })
     #Return the JSON representation of your dictionary.
-    world_web_string = json.dumps(world_web_dict)
-    world_web_string = world_web_string.replace("\"World Regions\"", "World Regions")
-    world_web_string = world_web_string.replace("\"Population\"", "Population")
-    world_web_string = world_web_string.replace("\"Population % of World\"", "Population % of World")
-    world_web_string = world_web_string.replace("\"Internet Users\"", "Internet Users")
-    world_web_string = world_web_string.replace("\"Penetration Rate (% Pop)\"", "Penetration Rate (% Pop)")
-    world_web_string = world_web_string.replace("\"Growth 2000-2020\"", "Growth 2000-2020")
-    world_web_string = world_web_string.replace("\"Internet World %\"", "Internet World %")
-    #return json string
-    return "world_web_data="+ world_web_string
+    return  jsonify(world_web_dict)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
