@@ -12,36 +12,10 @@
      accessToken: "pk.eyJ1IjoiYW5uYS1qZXNzaWNhIiwiYSI6ImNrYmQ2MW1yNjA4cmkycm80Ymh0a2s5aXAifQ.ZOUOyvEapguQx8cwAfSLaQ"
  }).addTo(map1);
 
-//  var regions =[
-//   {
-//   Countries: "Algeria",
-//   InternetUsers: 25428159,
-//   Percent_Population: 58,
-//   Population: 43851044,
-//   Region: "Africa",
-//   location: [36.7397,3.05097]
-// },
-// {
-//   Countries: "Angola",
-//   InternetUsers: 7078067,
-//   Percent_Population: 22,
-//   Population: 32866272,
-//   Region: "Africa",
-//   location: [-8.81155, 13.242]
-// },
-// {
-//   Countries: "Benin",
-//   InternetUsers: 3801758,
-//   Percent_Population: 31,
-//   Population: 12123200,
-//   Region: "Africa",
-//   location: [6.4779, 2.6323]
-
-// }];
 
   for (var i = 0; i < regions.length; i++) {
     var color = "";
-    console.log(regions[i].location);
+    // console.log(regions[i].location);
     if (regions[i].Percent_Population > 75) {
       color = "green";
     }
@@ -62,8 +36,8 @@
 
   
 
-// internet cost v. speed - bubbles - D3
-// internet cost v. speed - bubbles - D3
+
+// // internet cost v. speed - bubbles - D3
 var svgWidth = 1100;
 var svgHeight = 600;
 
@@ -82,12 +56,6 @@ var svg = d3.select(".scatter")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
 
-//   svg.append("rect")
-//     .attr("width", "100%")
-//     .attr("height", "100%")
-//     .attr("fill", "white");
-
-  
 
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -97,7 +65,7 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
 
     //  Parse Data/Cast as numbers
     costSpeedData.forEach(function(data) {
-      data.speed = +data.speed;
+      data.dlspeed = +data.dlspeed;
       data.cost = +data.cost;
     });
     //  Create scale functions
@@ -106,7 +74,7 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(costSpeedData, d => d.speed)])
+      .domain([0, d3.max(costSpeedData, d => d.dlspeed)])
       .range([height, 0]);
 
     //  Create axis functions
@@ -127,7 +95,7 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
     .enter()
     .append("circle")
     .attr("cx", d => xLinearScale(d.cost))
-    .attr("cy", d => yLinearScale(d.speed))
+    .attr("cy", d => yLinearScale(d.dlspeed))
     .attr("r", "15")
     .attr("fill", "yellow")
     .attr("opacity", ".8");
@@ -137,7 +105,7 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-        return (`${d.Country}<br>Speed: ${d.speed}<br>Cost: ${d.cost}`);
+        return (`${d.country}<br>Speed: ${d.dlspeed}<br>Cost: ${d.cost}`);
       });
 
     //  Create tooltip in the chart
@@ -158,12 +126,13 @@ d3.csv("internetData.csv").then(function(costSpeedData) {
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Internet Cost");
+      .text("Internet Speed");
 
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Internet Speed");
+      .text("Internet Monthly Cost");
   }).catch(function(error) {
     console.log(error);
   });
+

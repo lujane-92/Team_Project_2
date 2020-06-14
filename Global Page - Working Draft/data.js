@@ -419,7 +419,7 @@ var regions =[
   {
     Countries: "Canada",
     InternetUsers: 33221435,
-    Percent_Population: 9,
+    Percent_Population: 90,
     Population: 36953765,
     Region: "America",
     location: [  45.4215, -75.6919]
