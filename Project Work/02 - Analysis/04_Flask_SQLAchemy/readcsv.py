@@ -14,7 +14,7 @@ Base = declarative_base()
 
 from flask import Flask, jsonify
 
-url = 'postgresql://{user}:{pw}@{url}/{db}'.format(user="postgres",pw="lujane92",url="localhost",db="Internet_DB")
+url = 'postgresql://{user}:{pw}@{url}/{db}'.format(user="postgres",pw="postgres",url="localhost",db="Internet_DB")
 
 
 
@@ -91,14 +91,14 @@ def name():
     #Create list containing information
     country_dict=[]
     for i in range(len( Country_list)):
+        percentage=Country_list[i][2][0:len(Country_list[i][2])-2]
         country_dict.append({
             "Country": Country_list[i][0],
-            "Internet_Users":Country_list[i][1],
-            "Penetration_percentage_among_population":Country_list[i][2],
+            "InternetUsers":int(Country_list[i][1]),
+            "Percent_Population":int(round(float(percentage),0)),
             "Population":int(Country_list[i][3]),
             "Region":Country_list[i][4],
-            "Longitude":Country_list[i][5],
-            "Latitude":Country_list[i][6],
+            "Location":[Country_list[i][6],Country_list[i][5]]
         })
     #Return the JSON representation of your dictionary.
     return jsonify(country_dict)
@@ -142,11 +142,11 @@ def world_internet():
         world_web_dict.append({
             "World Regions": wrold_internet_stats[i][0],
             "Population":str(wrold_internet_stats[i][1]),
-            "Population % of World":wrold_internet_stats[i][2],
-            "Internet Users":wrold_internet_stats[i][3],
-            "Penetration Rate (% Pop)":wrold_internet_stats[i][4],
-            "Growth 2000-2020":wrold_internet_stats[i][5],
-            "Internet World %":wrold_internet_stats[i][6],
+            "Population_Perc_of_World":wrold_internet_stats[i][2],
+            "Internet_Users":wrold_internet_stats[i][3],
+            "Penetration_Rate":wrold_internet_stats[i][4],
+            "Growth_2000_2020":wrold_internet_stats[i][5],
+            "Internet_World_Perc":wrold_internet_stats[i][6],
         })
     #Return the JSON representation of your dictionary.
     return  jsonify(world_web_dict)
@@ -154,4 +154,6 @@ def world_internet():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
 
