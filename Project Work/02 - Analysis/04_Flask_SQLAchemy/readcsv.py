@@ -118,12 +118,11 @@ def internet_index():
         web_index_dict.append({
             "countries": web_index_list[i][0],
             "overalls":web_index_list[i][1],
-            "longitude":web_index_list[i][2],
-            "latitude":web_index_list[i][3],
             "universals":web_index_list[i][4],
             "freedoms":web_index_list[i][5],
             "relevant_content":web_index_list[i][6],
-            "empowerment":web_index_list[i][7]
+            "empowerment":web_index_list[i][7],
+            "location":[float(web_index_list[i][3]),float(web_index_list[i][2])]
         })
     #Return the JSON representation of your dictionary.
     return jsonify(web_index_dict)
@@ -160,4 +159,6 @@ def world_internet():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
 
