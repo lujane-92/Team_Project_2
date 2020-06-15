@@ -1,6 +1,6 @@
 // from data.js
 
-d3.json("world_details.json").then((importedData) => {
+d3.json("../Project Work/02 - Analysis/04_Flask_SQLAchemy/WorldInternet_JavaScript_2.json").then((importedData) => {
   console.log(importedData);
   var data = importedData;
 
@@ -15,7 +15,7 @@ var trace1 = {
 
 var trace2 = {
   x: data.map(row => row.World_Regions),
-  y: data.map(row => row.Internet_users),
+  y: data.map(row => row.Internet_Users),
   text: data.map(row => row.World_Regions),
   name: "Internet Users",
   type: "bar"

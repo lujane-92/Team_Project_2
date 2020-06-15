@@ -31,7 +31,7 @@ var trace1 = {
 };
 
 var trace2 = {
-  x: reversedData.map(object => object.Internet_Users),
+  x: reversedData.map(object => object.InternetUsers),
   y: reversedData.map(object => object.Country),
   name: "Internet_Users",
   type: "bar",

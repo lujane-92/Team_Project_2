@@ -12,7 +12,7 @@
      accessToken: "pk.eyJ1IjoiYW5uYS1qZXNzaWNhIiwiYSI6ImNrYmQ2MW1yNjA4cmkycm80Ymh0a2s5aXAifQ.ZOUOyvEapguQx8cwAfSLaQ"
  }).addTo(map1);
 
-d3.json("data.json").then(function(regions) {
+d3.json("../Project Work/02 - Analysis/04_Flask_SQLAchemy/InternetByCountry_JavaScript_2.json").then(function(regions) {
   console.log(regions);
 
   for (var i = 0; i < regions.length; i++) {
@@ -28,7 +28,7 @@ d3.json("data.json").then(function(regions) {
       color = "red";
     }
   
-    L.circle(regions[i].location, {
+    L.circle(regions[i].Location, {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
@@ -64,7 +64,7 @@ var chartGroup = svg.append("g")
 
 // Import Data
 
-d3.json("csvjson (1).json").then(function(costSpeedData) {
+d3.json("../Project Work/02 - Analysis/04_Flask_SQLAchemy/CostandSpeed_JavaScript_2.json").then(function(costSpeedData) {
   console.log(costSpeedData);
 
     //  Parse Data/Cast as numbers
