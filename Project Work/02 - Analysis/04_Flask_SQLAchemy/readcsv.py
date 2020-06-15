@@ -1,4 +1,5 @@
 import json
+import pandas as pd
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
@@ -55,6 +56,14 @@ class World_Internet(Base):
   Growth_between_2000_and_2020 = Column(String)
   World_Internet_User_Share = Column(String)
 
+class Cost_Speed(Base):
+  __tablename__ = "Cost_Speed"
+  index = Column(Integer, primary_key=True)
+  Countries = Column(String)
+  Avg_Monthly_Cost_in_GBP = Column(sqlalchemy.types.Float)
+  Avg_Download_Speed_Mbps = Column(sqlalchemy.types.Float)
+  Avg_Upload_Speed_Mbps = Column(sqlalchemy.types.Float)
+
  
 
 engine = create_engine(url)
@@ -75,8 +84,7 @@ def welcome():
         f"/api/v1.0/WebIndex1<br/>"
         f"/api/v1.0/WebIndex2<br/>"
         f"/api/v1.0/WorldInternet<br/>"
-        f"/api/v1.0/<start><br/>"
-        f"/api/v1.0/<start>/<end>"
+        f"/api/v1.0/CostandSpeed<br/>"
     )
 
 
@@ -183,7 +191,26 @@ def world_internet():
     return  jsonify(world_web_dict)
 
 
+@app.route("/api/v1.0/CostandSpeed")
+def costAndspeed():
+    #Query result
+    session = Session(bind=engine)
+    cost_speed_stats=session.query(Cost_Speed.Countries,Cost_Speed.Avg_Monthly_Cost_in_GBP,Cost_Speed.Avg_Download_Speed_Mbps).all()
+    session.close()
+    print(Cost_Speed)
+    print(cost_speed_stats)
+    #Create list containing information
+    cost_speed_dict=[]
+    for i in range(len(cost_speed_stats)):
+        cost_speed_dict.append({
+            "country": cost_speed_stats[i][0],
+            "cost":cost_speed_stats[i][1],
+            "dlspeed":cost_speed_stats[i][2]
+        })
+    #Return the JSON representation of your dictionary.
+    return  jsonify(cost_speed_dict)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
-
 
