@@ -138,15 +138,21 @@ def world_internet():
     print(wrold_internet_stats)
     #Create list containing information
     world_web_dict=[]
-    for i in range(len(wrold_internet_stats)):
+    for i in range(len(wrold_internet_stats)-1):
+        Growth=wrold_internet_stats[i][5][0:len(wrold_internet_stats[i][5])-2]
+        print(Growth)
+        Growth1=Growth.split(",")
+        print(Growth.split(","))
+        Growth2=''.join(Growth1)
+        print(Growth2)
         world_web_dict.append({
             "World Regions": wrold_internet_stats[i][0],
-            "Population":str(wrold_internet_stats[i][1]),
-            "Population_Perc_of_World":wrold_internet_stats[i][2],
+            "Population":wrold_internet_stats[i][1],
+            "Population_Perc_of_World":float(wrold_internet_stats[i][2][0:len(wrold_internet_stats[i][2])-2])/100,
             "Internet_Users":wrold_internet_stats[i][3],
-            "Penetration_Rate":wrold_internet_stats[i][4],
-            "Growth_2000_2020":wrold_internet_stats[i][5],
-            "Internet_World_Perc":wrold_internet_stats[i][6],
+            "Penetration_Rate":float(wrold_internet_stats[i][4][0:len(wrold_internet_stats[i][4])-2])/100,
+            "Growth_2000_2020":float(Growth2)/100,
+            "Internet_World_Perc":float(wrold_internet_stats[i][6][0:len(wrold_internet_stats[i][6])-2])/100
         })
     #Return the JSON representation of your dictionary.
     return  jsonify(world_web_dict)
@@ -154,6 +160,4 @@ def world_internet():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
 
