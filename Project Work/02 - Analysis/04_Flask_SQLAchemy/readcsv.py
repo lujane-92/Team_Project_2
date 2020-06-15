@@ -72,7 +72,8 @@ def welcome():
     return (
         f"Available Routes:<br/>"
         f"/api/v1.0/InternetByCountry<br/>"
-        f"/api/v1.0/WebIndex<br/>"
+        f"/api/v1.0/WebIndex1<br/>"
+        f"/api/v1.0/WebIndex2<br/>"
         f"/api/v1.0/WorldInternet<br/>"
         f"/api/v1.0/<start><br/>"
         f"/api/v1.0/<start>/<end>"
@@ -104,8 +105,33 @@ def name():
     return jsonify(country_dict)
 
 
-@app.route("/api/v1.0/WebIndex")
-def internet_index():
+@app.route("/api/v1.0/WebIndex1")
+def internet_index1():
+    #Query result
+    session = Session(bind=engine)
+    web_index_list=session.query(webindex.Countries,webindex.Overall_Score,webindex.Longitude,webindex.Latitude,webindex.Universal_Access,webindex.Freedom_and_Openness,webindex.Relevant_content,webindex.Empowerment).all()
+    session.close()
+    print(webindex)
+    print(web_index_list)
+    #Create list containing information
+    web_index_dict=[]
+    for i in range(len(web_index_list)):
+        web_index_dict.append({
+            "countries": web_index_list[i][0],
+            "overalls":web_index_list[i][1],
+            "longitude":float(web_index_list[i][2]),
+            "latitude":float(web_index_list[i][3]),
+            "universals":web_index_list[i][4],
+            "freedoms":web_index_list[i][5],
+            "relevant_content":web_index_list[i][6],
+            "empowerment":web_index_list[i][7],
+        })
+    #Return the JSON representation of your dictionary.
+    return jsonify(web_index_dict)
+
+
+@app.route("/api/v1.0/WebIndex2")
+def internet_index2():
     #Query result
     session = Session(bind=engine)
     web_index_list=session.query(webindex.Countries,webindex.Overall_Score,webindex.Longitude,webindex.Latitude,webindex.Universal_Access,webindex.Freedom_and_Openness,webindex.Relevant_content,webindex.Empowerment).all()
@@ -145,7 +171,7 @@ def world_internet():
         Growth2=''.join(Growth1)
         print(Growth2)
         world_web_dict.append({
-            "World Regions": wrold_internet_stats[i][0],
+            "World_Regions": wrold_internet_stats[i][0],
             "Population":wrold_internet_stats[i][1],
             "Population_Perc_of_World":float(wrold_internet_stats[i][2][0:len(wrold_internet_stats[i][2])-2])/100,
             "Internet_Users":wrold_internet_stats[i][3],
@@ -159,6 +185,5 @@ def world_internet():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
 
 
