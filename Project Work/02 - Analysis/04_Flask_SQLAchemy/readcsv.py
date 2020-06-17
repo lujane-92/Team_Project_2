@@ -22,47 +22,47 @@ url = 'postgresql://{user}:{pw}@{url}/{db}'.format(user="postgres",pw="postgres"
 
 
 class Country_Data(Base):
-  __tablename__ = "country_detail"
+  __tablename__ = "country"
   index = Column(Integer, primary_key=True)
-  Countries = Column(String)
-  Internet_Users = Column(String)
-  Penetration_percentage = Column(String)
-  Population = Column(String)
-  Region = Column(String)
-  Longitude = Column(String)
-  Latitude = Column(String)
+  countries = Column(String)
+  internet_users = Column(String)
+  penetration = Column(String)
+  population = Column(String)
+  region = Column(String)
+  longitude = Column(String)
+  latitude = Column(String)
 
 
 class webindex(Base):
-  __tablename__ = "webindex"
+  __tablename__ = "wi"
   index = Column(Integer, primary_key=True)
-  Countries = Column(String)
-  Overall_Score = Column(sqlalchemy.types.Float)
-  Longitude = Column(sqlalchemy.types.Float)
-  Latitude = Column(sqlalchemy.types.Float)
-  Universal_Access = Column(sqlalchemy.types.Float)
-  Freedom_and_Openness = Column(sqlalchemy.types.Float)
-  Relevant_content = Column(sqlalchemy.types.Float)
-  Empowerment = Column(sqlalchemy.types.Float)
+  countries = Column(String)
+  overall_score = Column(sqlalchemy.types.Float)
+  longitude = Column(sqlalchemy.types.Float)
+  latitude = Column(sqlalchemy.types.Float)
+  universal_access = Column(sqlalchemy.types.Float)
+  freedom_openness = Column(sqlalchemy.types.Float)
+  relevant_content = Column(sqlalchemy.types.Float)
+  empowerment = Column(sqlalchemy.types.Float)
   
 class World_Internet(Base):
-  __tablename__ = "world_details"
+  __tablename__ = "world"
   index = Column(Integer, primary_key=True)
-  World_Regions = Column(String)
-  Population = Column(String)
-  World_Population_Share = Column(String)
-  Internet_Users = Column(String)
-  Penetration_percentage = Column(String)
-  Growth_between_2000_and_2020 = Column(String)
-  World_Internet_User_Share = Column(String)
+  world_regions = Column(String)
+  population = Column(String)
+  pop = Column(String)
+  internet_users = Column(String)
+  penetration_rate = Column(String)
+  growth = Column(String)
+  internet_world = Column(String)
 
 class Cost_Speed(Base):
-  __tablename__ = "Cost_Speed"
+  __tablename__ = "cost_speed"
   index = Column(Integer, primary_key=True)
-  Countries = Column(String)
-  Avg_Monthly_Cost_in_GBP = Column(sqlalchemy.types.Float)
-  Avg_Download_Speed_Mbps = Column(sqlalchemy.types.Float)
-  Avg_Upload_Speed_Mbps = Column(sqlalchemy.types.Float)
+  countries = Column(String)
+  avg_monthly_cost_in_gbp = Column(sqlalchemy.types.Float)
+  avg_download_speed_mbps = Column(sqlalchemy.types.Float)
+  avg_upload_speed_mbps = Column(sqlalchemy.types.Float)
 
  
 
@@ -93,7 +93,7 @@ def welcome():
 def name():
     #Query result
     session = Session(bind=engine)
-    Country_list=session.query(Country_Data.Countries,Country_Data.Internet_Users,Country_Data.Penetration_percentage,Country_Data.Population,Country_Data.Region,Country_Data.Longitude,Country_Data.Latitude).all()
+    Country_list=session.query(Country_Data.countries,Country_Data.internet_users,Country_Data.penetration,Country_Data.population,Country_Data.region,Country_Data.longitude,Country_Data.latitude).all()
     session.close()
     print(Country_Data)
     print(Country_list)
@@ -117,55 +117,55 @@ def name():
 def internet_index1():
     #Query result
     session = Session(bind=engine)
-    web_index_list=session.query(webindex.Countries,webindex.Overall_Score,webindex.Longitude,webindex.Latitude,webindex.Universal_Access,webindex.Freedom_and_Openness,webindex.Relevant_content,webindex.Empowerment).all()
+    web_index_list1=session.query(webindex.countries,webindex.overall_score,webindex.longitude,webindex.latitude,webindex.universal_access,webindex.freedom_openness,webindex.relevant_content,webindex.empowerment).all()
     session.close()
     print(webindex)
-    print(web_index_list)
+    print(web_index_list1)
     #Create list containing information
-    web_index_dict=[]
-    for i in range(len(web_index_list)):
-        web_index_dict.append({
-            "countries": web_index_list[i][0],
-            "overalls":web_index_list[i][1],
-            "longitude":float(web_index_list[i][2]),
-            "latitude":float(web_index_list[i][3]),
-            "universals":web_index_list[i][4],
-            "freedoms":web_index_list[i][5],
-            "relevant_content":web_index_list[i][6],
-            "empowerment":web_index_list[i][7],
+    web_index_dict1=[]
+    for i in range(len(web_index_list1)):
+        web_index_dict1.append({
+            "countries": web_index_list1[i][0],
+            "overalls":web_index_list1[i][1],
+            "longitude":float(web_index_list1[i][2]),
+            "latitude":float(web_index_list1[i][3]),
+            "universals":web_index_list1[i][4],
+            "freedoms":web_index_list1[i][5],
+            "relevant_content":web_index_list1[i][6],
+            "empowerment":web_index_list1[i][7],
         })
     #Return the JSON representation of your dictionary.
-    return jsonify(web_index_dict)
+    return jsonify(web_index_dict1)
 
 
 @app.route("/api/v1.0/WebIndex2")
 def internet_index2():
     #Query result
     session = Session(bind=engine)
-    web_index_list=session.query(webindex.Countries,webindex.Overall_Score,webindex.Longitude,webindex.Latitude,webindex.Universal_Access,webindex.Freedom_and_Openness,webindex.Relevant_content,webindex.Empowerment).all()
+    web_index_list2=session.query(webindex.countries,webindex.overall_score,webindex.longitude,webindex.latitude,webindex.universal_access,webindex.freedom_openness,webindex.relevant_content,webindex.empowerment).all()
     session.close()
     print(webindex)
-    print(web_index_list)
+    print(web_index_list2)
     #Create list containing information
-    web_index_dict=[]
-    for i in range(len(web_index_list)):
-        web_index_dict.append({
-            "countries": web_index_list[i][0],
-            "overalls":web_index_list[i][1],
-            "universals":web_index_list[i][4],
-            "freedoms":web_index_list[i][5],
-            "relevant_content":web_index_list[i][6],
-            "empowerment":web_index_list[i][7],
-            "location":[float(web_index_list[i][3]),float(web_index_list[i][2])]
+    web_index_dict2=[]
+    for i in range(len(web_index_list2)):
+        web_index_dict2.append({
+            "countries": web_index_list2[i][0],
+            "overalls":web_index_list2[i][1],
+            "universals":web_index_list2[i][4],
+            "freedoms":web_index_list2[i][5],
+            "relevant_content":web_index_list2[i][6],
+            "empowerment":web_index_list2[i][7],
+            "location":[float(web_index_list2[i][3]),float(web_index_list2[i][2])]
         })
     #Return the JSON representation of your dictionary.
-    return jsonify(web_index_dict)
+    return jsonify(web_index_dict2)
 
 @app.route("/api/v1.0/WorldInternet")
 def world_internet():
     #Query result
     session = Session(bind=engine)
-    wrold_internet_stats=session.query(World_Internet.World_Regions,World_Internet.Population,World_Internet.World_Population_Share,World_Internet.Internet_Users,World_Internet.Penetration_percentage,World_Internet.Growth_between_2000_and_2020,World_Internet.World_Internet_User_Share).all()
+    wrold_internet_stats=session.query(World_Internet.world_regions,World_Internet.population,World_Internet.pop,World_Internet.internet_users,World_Internet.penetration_rate,World_Internet.growth,World_Internet.internet_world).all()
     session.close()
     print(World_Internet)
     print(wrold_internet_stats)
@@ -195,7 +195,7 @@ def world_internet():
 def costAndspeed():
     #Query result
     session = Session(bind=engine)
-    cost_speed_stats=session.query(Cost_Speed.Countries,Cost_Speed.Avg_Monthly_Cost_in_GBP,Cost_Speed.Avg_Download_Speed_Mbps).all()
+    cost_speed_stats=session.query(Cost_Speed.countries,Cost_Speed.avg_monthly_cost_in_gbp,Cost_Speed.avg_download_speed_mbps).all()
     session.close()
     print(Cost_Speed)
     print(cost_speed_stats)
