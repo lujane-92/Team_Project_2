@@ -125,14 +125,14 @@ def internet_index1():
     web_index_dict1=[]
     for i in range(len(web_index_list1)):
         web_index_dict1.append({
-            "countries": web_index_list1[i][0],
-            "overalls":web_index_list1[i][1],
-            "longitude":float(web_index_list1[i][2]),
-            "latitude":float(web_index_list1[i][3]),
-            "universals":web_index_list1[i][4],
-            "freedoms":web_index_list1[i][5],
-            "relevant_content":web_index_list1[i][6],
-            "empowerment":web_index_list1[i][7],
+            "Countries": web_index_list1[i][0],
+            "Latitude":float(web_index_list1[i][3]),
+            "Longitude":float(web_index_list1[i][2]),
+            "Overall score":web_index_list1[i][1],
+            "Universal Access":web_index_list1[i][4],
+            "Freedoms & Openness":web_index_list1[i][5],
+            "Relevant Content":web_index_list1[i][6],
+            "Empowerment":web_index_list1[i][7]
         })
     #Return the JSON representation of your dictionary.
     return jsonify(web_index_dict1)
